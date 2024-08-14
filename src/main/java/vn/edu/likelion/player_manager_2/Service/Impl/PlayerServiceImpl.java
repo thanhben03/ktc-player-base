@@ -62,7 +62,7 @@ public class PlayerServiceImpl implements PlayerService {
         playerEntity.setFavorableFoot(playerDTO.getFavorable_foot());
         playerEntity.setTeamId(playerDTO.getTeam_id());
 
-        return playerEntity;
+        return playerRepository.save(playerEntity);
     }
 
 }
