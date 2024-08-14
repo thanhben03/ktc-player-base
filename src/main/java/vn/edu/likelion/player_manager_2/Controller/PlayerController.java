@@ -20,36 +20,61 @@ public class PlayerController {
     private PlayerServiceImpl playerService;
 
     @PostMapping
-    private PlayerEntity insertPlayer(@RequestBody PlayerDTO playerDTO){
-        return playerService.create(playerDTO);
+    private ResponseEntity<Object> insertPlayer(@RequestBody PlayerDTO playerDTO) {
+        try {
+            PlayerEntity playerEntity = playerService.create(playerDTO);
+            return ResponseHandler.generateResponse(HttpStatus.OK, false,
+                    "Insert Success!", playerEntity);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(HttpStatus.BAD_REQUEST, true, "Failed!", e.getMessage());
+        }
     }
-    @PutMapping("/{id}")
-    private PlayerEntity updatePlayer (@PathVariable int id,@RequestBody PlayerDTO playerDTO){
 
-        return playerService.update(id, playerDTO);
+    @PutMapping("/{id}")
+    private ResponseEntity<Object> updatePlayer(@PathVariable int id, @RequestBody PlayerDTO playerDTO) {
+        try {
+            PlayerEntity playerEntity = playerService.update(id, playerDTO);
+            return ResponseHandler.generateResponse(HttpStatus.OK, false,
+                    "Update Success!", playerEntity);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(HttpStatus.BAD_REQUEST, true, "Failed!", e.getMessage());
+        }
     }
 
     @GetMapping
-    private Iterable<PlayerEntity> findAllPlayer(){
-        return playerService.findAll();
+    private ResponseEntity<Object> findAllPlayer() {
+        try {
+            Iterable<PlayerEntity> playerEntityList = playerService.findAll();
+            return ResponseHandler.generateResponse(HttpStatus.OK, false,
+                    "Find Success!", playerEntityList);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(HttpStatus.BAD_REQUEST, true,
+                    "Failed!", e.getMessage());
+        }
     }
 
     @GetMapping("/{id}")
-    private ResponseEntity<Object> findById(@PathVariable int id){
+    private ResponseEntity<Object> findById(@PathVariable int id) {
         try {
-             PlayerEntity playerEntity = playerService.findById(id);
-
-             return ResponseHandler.generateResponse(HttpStatus.OK, false, "Find Success !", playerEntity);
+            PlayerEntity playerEntity = playerService.findById(id);
+            return ResponseHandler.generateResponse(HttpStatus.OK, false,
+                    "Find Success!", playerEntity);
         } catch (Exception e) {
-            return ResponseHandler.generateResponse(HttpStatus.BAD_REQUEST, true, "Failed !", e.getMessage());
-
+            return ResponseHandler.generateResponse(HttpStatus.BAD_REQUEST, true,
+                    "Failed!", e.getMessage());
         }
     }
 
     @DeleteMapping("/{id}")
-    private ResponseEntity<?> deletePlayer(@PathVariable int id){
-        playerService.remove(id);
-        return ResponseEntity.status(HttpStatus.OK).body("Delete Succeeded");
+    private ResponseEntity<Object> deletePlayer(@PathVariable int id) {
+        try {
+            playerService.remove(id);
+            return ResponseHandler.generateResponse(HttpStatus.OK, false,
+                    "Delete Success!", playerService);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(HttpStatus.BAD_REQUEST, true,
+                    "Failed!", e.getMessage());
+        }
     }
 }
 
