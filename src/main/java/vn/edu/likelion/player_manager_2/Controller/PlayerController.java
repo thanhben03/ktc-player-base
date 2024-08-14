@@ -13,7 +13,7 @@ import vn.edu.likelion.player_manager_2.Service.PlayerService;
 import vn.edu.likelion.player_manager_2.Util.ResponseHandler;
 
 @RestController
-@RequestMapping("/api/player")
+@RequestMapping("/api/v1/player")
 @CrossOrigin
 public class PlayerController {
     @Autowired
