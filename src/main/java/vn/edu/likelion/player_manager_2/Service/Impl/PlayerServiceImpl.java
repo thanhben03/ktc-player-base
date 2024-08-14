@@ -7,6 +7,8 @@ import vn.edu.likelion.player_manager_2.Model.PlayerDTO;
 import vn.edu.likelion.player_manager_2.Repository.PlayerRepository;
 import vn.edu.likelion.player_manager_2.Service.PlayerService;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -63,6 +65,14 @@ public class PlayerServiceImpl implements PlayerService {
         playerEntity.setTeamId(playerDTO.getTeam_id());
 
         return playerRepository.save(playerEntity);
+    }
+
+    public Map<String, String> compare(int player_1, int player_2) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("key", "value");
+        map.put("foo", "bar");
+        map.put("aa", "bb");
+        return map;
     }
 
 }

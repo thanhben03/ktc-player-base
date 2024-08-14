@@ -76,5 +76,10 @@ public class PlayerController {
                     "Failed!", e.getMessage());
         }
     }
+
+//    @PostMapping("/compare")
+//    private ResponseEntity<Object> compare(@RequestParam int player_1, @RequestParam int player_2) {
+//
+//    }
 }
 
