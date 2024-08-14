@@ -8,7 +8,7 @@ import vn.edu.likelion.player_manager_2.Service.UploadService;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/api/upload")
+@RequestMapping("/api/v1/upload")
 @CrossOrigin
 public class UploadController {
     private final UploadService cloudinaryService;
