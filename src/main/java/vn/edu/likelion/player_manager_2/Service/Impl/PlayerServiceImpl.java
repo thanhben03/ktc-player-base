@@ -8,6 +8,7 @@ import vn.edu.likelion.player_manager_2.Repository.PlayerRepository;
 import vn.edu.likelion.player_manager_2.Service.PlayerService;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -73,6 +74,26 @@ public class PlayerServiceImpl implements PlayerService {
         map.put("foo", "bar");
         map.put("aa", "bb");
         return map;
+    }
+
+    public Iterable<PlayerEntity> sort(String type, String order) {
+        Iterable<PlayerEntity> playerEntities = null;
+
+        switch (type) {
+            case "position":
+                if (order.equals("desc"))
+                    playerEntities = playerRepository.findByOrderByPositionDesc();
+                else
+                    playerEntities = playerRepository.findByOrderByPositionAsc();
+                break;
+            case "salary":
+                if (order.equals("desc"))
+                    playerEntities = playerRepository.findByOrderBySalaryDesc();
+                else
+                    playerEntities = playerRepository.findByOrderBySalaryAsc();
+                break;
+        }
+        return playerEntities;
     }
 
 }

@@ -39,5 +39,7 @@ public class PlayerEntity extends BaseEntity {
 
     @Column(name = "team_id")
     private int teamId; // thuộc team...
+
+    private double salary;
 }
 
