@@ -4,12 +4,10 @@ package vn.edu.likelion.player_manager_2.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import vn.edu.likelion.player_manager_2.Entity.PlayerEntity;
 import vn.edu.likelion.player_manager_2.Model.PlayerDTO;
 import vn.edu.likelion.player_manager_2.Service.Impl.PlayerServiceImpl;
-import vn.edu.likelion.player_manager_2.Service.PlayerService;
 import vn.edu.likelion.player_manager_2.Util.ResponseHandler;
 
 @RestController
