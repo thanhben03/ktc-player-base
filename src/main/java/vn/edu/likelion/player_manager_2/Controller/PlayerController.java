@@ -11,6 +11,7 @@ import vn.edu.likelion.player_manager_2.Service.Impl.PlayerServiceImpl;
 import vn.edu.likelion.player_manager_2.Util.ResponseHandler;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/player")
@@ -102,9 +103,16 @@ public class PlayerController {
     }
 
 
-//    @PostMapping("/compare")
-//    private ResponseEntity<Object> compare(@RequestParam int player_1, @RequestParam int player_2) {
-//
-//    }
+    @PostMapping("/compare")
+    private ResponseEntity<Object> compare(@RequestParam int player_1, @RequestParam int player_2) {
+        try {
+            Map<String, Object> res = playerService.compare(player_1, player_2);
+            return ResponseHandler.generateResponse(HttpStatus.OK, false,
+                    "Success!", res);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(HttpStatus.BAD_REQUEST, true,
+                    "Failed!", e.getMessage());
+        }
+    }
 }
 
