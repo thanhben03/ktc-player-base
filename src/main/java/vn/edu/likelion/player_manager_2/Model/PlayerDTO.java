@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 public class PlayerDTO extends BaseDTO{
     private String name;
+    private String avatar;
     private String year_of_birth; // năm sinh
     private String country; // quê quán
     private int height; // chiều cao
