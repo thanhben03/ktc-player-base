@@ -17,6 +17,8 @@ public class PlayerEntity extends BaseEntity {
     @Column(unique = true, nullable = false)
     private String name; // tên cầu thủ
 
+    private String avatar;
+
     @Column(name = "year_of_birth", nullable = false)
     private String yearOfBirth; // năm sinh
 
