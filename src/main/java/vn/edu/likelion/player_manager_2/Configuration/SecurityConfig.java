@@ -56,6 +56,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/welcome", "/api/v1/auth/register", "/api/v1/auth/login").permitAll())
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/api/v1/player/**").authenticated())
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/api/v1/team/**").authenticated())
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/api/v1/upload/**").authenticated())
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
