@@ -3,15 +3,15 @@ package vn.edu.likelion.player_manager_2.Service.Impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vn.edu.likelion.player_manager_2.Entity.PlayerEntity;
+import vn.edu.likelion.player_manager_2.Entity.TeamEntity;
 import vn.edu.likelion.player_manager_2.Model.PlayerDTO;
 import vn.edu.likelion.player_manager_2.Repository.PlayerRepository;
+import vn.edu.likelion.player_manager_2.Repository.TeamRepository;
 import vn.edu.likelion.player_manager_2.Response.PlayerCompare;
 import vn.edu.likelion.player_manager_2.Service.PlayerService;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @Service
 public class PlayerServiceImpl implements PlayerService {
@@ -19,7 +19,11 @@ public class PlayerServiceImpl implements PlayerService {
     @Autowired
     private PlayerRepository playerRepository;
 
+    @Autowired
+    private TeamRepository teamRepository;
+
     public PlayerEntity create(PlayerDTO playerDTO) {
+        TeamEntity teamEntity = teamRepository.findById(playerDTO.getTeam_id()).get();
         PlayerEntity playerEntity = new PlayerEntity();
         playerEntity.setName(playerDTO.getName());
         playerEntity.setYearOfBirth(playerDTO.getYear_of_birth());
@@ -28,7 +32,7 @@ public class PlayerServiceImpl implements PlayerService {
         playerEntity.setWeigh(playerDTO.getWeigh());
         playerEntity.setPosition(playerDTO.getPosition());
         playerEntity.setFavorableFoot(playerDTO.getFavorable_foot());
-        playerEntity.setTeamId(playerDTO.getTeam_id());
+        playerEntity.setTeam(teamEntity);
 
         return playerRepository.save(playerEntity);
     }
@@ -56,6 +60,7 @@ public class PlayerServiceImpl implements PlayerService {
 
     public PlayerEntity update(int id, PlayerDTO playerDTO) {
         PlayerEntity playerEntity = playerRepository.findById(id).get();
+        TeamEntity teamEntity = teamRepository.findById(playerDTO.getTeam_id()).get();
 
         playerEntity.setName(playerDTO.getName());
         playerEntity.setYearOfBirth(playerDTO.getYear_of_birth());
@@ -64,7 +69,7 @@ public class PlayerServiceImpl implements PlayerService {
         playerEntity.setWeigh(playerDTO.getWeigh());
         playerEntity.setPosition(playerDTO.getPosition());
         playerEntity.setFavorableFoot(playerDTO.getFavorable_foot());
-        playerEntity.setTeamId(playerDTO.getTeam_id());
+        playerEntity.setTeam(teamEntity);
 
         return playerRepository.save(playerEntity);
     }
