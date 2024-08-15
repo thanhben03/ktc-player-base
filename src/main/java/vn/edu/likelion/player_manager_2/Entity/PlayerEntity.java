@@ -39,5 +39,15 @@ public class PlayerEntity extends BaseEntity {
 
     @Column(name = "team_id")
     private int teamId; // thuộc team...
+
+    private double salary;
+
+    private int ss; // speed
+
+    private int bc; // ball control
+
+    private int ls; // long sort
+
+    private int sp; // shot power
 }
 
