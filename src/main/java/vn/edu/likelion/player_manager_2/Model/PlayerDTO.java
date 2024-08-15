@@ -13,4 +13,9 @@ public class PlayerDTO extends BaseDTO{
     private String position; // vị trí
     private String favorable_foot; // chân thuận
     private int team_id; // thuộc team...
+
+    private int ss; // speed
+    private int bc; // ball control
+    private int ls; // long sort
+    private int sp; // shot power
 }

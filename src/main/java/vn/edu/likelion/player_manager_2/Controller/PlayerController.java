@@ -103,7 +103,7 @@ public class PlayerController {
     }
 
 
-    @PostMapping("/compare")
+    @GetMapping("/compare")
     private ResponseEntity<Object> compare(@RequestParam int player_1, @RequestParam int player_2) {
         try {
             Map<String, Object> res = playerService.compare(player_1, player_2);
