@@ -1,5 +1,6 @@
 package vn.edu.likelion.player_manager_2.Service.Impl;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vn.edu.likelion.player_manager_2.Entity.PlayerEntity;
@@ -11,6 +12,7 @@ import vn.edu.likelion.player_manager_2.Response.PlayerCompare;
 import vn.edu.likelion.player_manager_2.Service.PlayerService;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -33,7 +35,11 @@ public class PlayerServiceImpl implements PlayerService {
         playerEntity.setPosition(playerDTO.getPosition());
         playerEntity.setFavorableFoot(playerDTO.getFavorable_foot());
         playerEntity.setTeam(teamEntity);
-
+        playerEntity.setSalary(playerDTO.getSalary());
+        playerEntity.setBc(playerDTO.getBc());
+        playerEntity.setLs(playerDTO.getLs());
+        playerEntity.setSs(playerDTO.getSs());
+        playerEntity.setSp(playerDTO.getSp());
         return playerRepository.save(playerEntity);
     }
 
@@ -44,8 +50,12 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public void remove(int id) {
-        playerRepository.deleteById(id);
+    public void remove(int id) throws EntityNotFoundException{
+        PlayerEntity playerEntity = playerRepository.findById(id).get();
+        if (playerEntity.getId() != 0)
+            playerRepository.deleteById(id);
+        else
+            throw new EntityNotFoundException("Player not found");
     }
 
     @Override
@@ -70,7 +80,11 @@ public class PlayerServiceImpl implements PlayerService {
         playerEntity.setPosition(playerDTO.getPosition());
         playerEntity.setFavorableFoot(playerDTO.getFavorable_foot());
         playerEntity.setTeam(teamEntity);
-
+        playerEntity.setBc(playerDTO.getBc());
+        playerEntity.setSalary(playerDTO.getSalary());
+        playerEntity.setLs(playerDTO.getLs());
+        playerEntity.setSs(playerDTO.getSs());
+        playerEntity.setSp(playerDTO.getSp());
         return playerRepository.save(playerEntity);
     }
 
@@ -129,6 +143,9 @@ public class PlayerServiceImpl implements PlayerService {
         return playerEntities;
     }
 
+    public List<PlayerEntity> search(String q) {
 
+        return playerRepository.findByNameContaining(q);
+    }
 
 }

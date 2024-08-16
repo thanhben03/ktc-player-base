@@ -15,4 +15,6 @@ public interface PlayerRepository extends JpaRepository<PlayerEntity, Integer> {
 
     Iterable<PlayerEntity> findByOrderBySalaryDesc();
     Iterable<PlayerEntity> findByOrderBySalaryAsc();
+
+    List<PlayerEntity> findByNameContaining(String name);
 }
