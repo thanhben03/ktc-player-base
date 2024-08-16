@@ -78,12 +78,12 @@ public class PlayerController {
         }
     }
 
-    @GetMapping("/search/{id}")
-    private ResponseEntity<Object> search(@PathVariable int id) {
+    @GetMapping("/search")
+    private ResponseEntity<Object> search(@RequestParam String q) {
         try {
-            PlayerEntity playerEntity = playerService.findById(id);
+            List<PlayerEntity> playerEntities = playerService.search(q);
             return ResponseHandler.generateResponse(HttpStatus.OK, false,
-                    "Success!", playerEntity);
+                    "Success!", playerEntities);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(HttpStatus.BAD_REQUEST, true,
                     "Failed!", e.getMessage());
