@@ -33,7 +33,11 @@ public class PlayerServiceImpl implements PlayerService {
         playerEntity.setPosition(playerDTO.getPosition());
         playerEntity.setFavorableFoot(playerDTO.getFavorable_foot());
         playerEntity.setTeam(teamEntity);
-
+        playerEntity.setSalary(playerDTO.getSalary());
+        playerEntity.setBc(playerDTO.getBc());
+        playerEntity.setLs(playerDTO.getLs());
+        playerEntity.setSs(playerDTO.getSs());
+        playerEntity.setSp(playerDTO.getSp());
         return playerRepository.save(playerEntity);
     }
 
@@ -70,7 +74,11 @@ public class PlayerServiceImpl implements PlayerService {
         playerEntity.setPosition(playerDTO.getPosition());
         playerEntity.setFavorableFoot(playerDTO.getFavorable_foot());
         playerEntity.setTeam(teamEntity);
-
+        playerEntity.setBc(playerDTO.getBc());
+        playerEntity.setSalary(playerDTO.getSalary());
+        playerEntity.setLs(playerDTO.getLs());
+        playerEntity.setSs(playerDTO.getSs());
+        playerEntity.setSp(playerDTO.getSp());
         return playerRepository.save(playerEntity);
     }
 

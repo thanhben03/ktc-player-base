@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TeamEntity extends BaseEntity {
-    @Column
+    @Column(unique = true)
     private String name; // tên đội bóng
     @Column
     private String city; // thành phố
