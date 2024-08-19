@@ -12,7 +12,6 @@ public class PlayerDTO extends BaseDTO{
     private int height; // chiều cao
     private float weigh; // cân nặng
     private String position; // vị trí
-    private String favorable_foot; // chân thuận
     private int team_id; // thuộc team...
 
     private int ss; // speed
