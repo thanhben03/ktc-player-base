@@ -34,8 +34,8 @@ public class PlayerEntity extends BaseEntity {
     @Column
     private String position; // vị trí
 
-    @Column(name = "favorable_foot")
-    private String favorableFoot; // chân thuận
+//    @Column(name = "favorable_foot")
+//    private String favorableFoot; // chân thuận
 
     @ManyToOne
     @JoinColumn(name = "team_id", nullable = false)

@@ -34,7 +34,7 @@ public class PlayerServiceImpl implements PlayerService {
         playerEntity.setHeight(playerDTO.getHeight());
         playerEntity.setWeigh(playerDTO.getWeigh());
         playerEntity.setPosition(playerDTO.getPosition());
-        playerEntity.setFavorableFoot(playerDTO.getFavorable_foot());
+//        playerEntity.setFavorableFoot(playerDTO.getFavorable_foot());
         playerEntity.setTeam(teamEntity);
         playerEntity.setSalary(playerDTO.getSalary());
         playerEntity.setBc(playerDTO.getBc());
@@ -80,7 +80,7 @@ public class PlayerServiceImpl implements PlayerService {
         playerEntity.setHeight(playerDTO.getHeight());
         playerEntity.setWeigh(playerDTO.getWeigh());
         playerEntity.setPosition(playerDTO.getPosition());
-        playerEntity.setFavorableFoot(playerDTO.getFavorable_foot());
+//        playerEntity.setFavorableFoot(playerDTO.getFavorable_foot());
         playerEntity.setTeam(teamEntity);
         playerEntity.setBc(playerDTO.getBc());
         playerEntity.setSalary(playerDTO.getSalary());
@@ -145,9 +145,13 @@ public class PlayerServiceImpl implements PlayerService {
         return playerEntities;
     }
 
+
+    //filter theo position & teamName
+
     public List<PlayerEntity> search(String q) {
 
         return playerRepository.findByNameContaining(q);
     }
+
 
 }
