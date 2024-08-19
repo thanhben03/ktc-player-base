@@ -28,6 +28,7 @@ public class PlayerServiceImpl implements PlayerService {
         TeamEntity teamEntity = teamRepository.findById(playerDTO.getTeam_id()).get();
         PlayerEntity playerEntity = new PlayerEntity();
         playerEntity.setName(playerDTO.getName());
+        playerEntity.setAvatar(playerDTO.getAvatar());
         playerEntity.setYearOfBirth(playerDTO.getYear_of_birth());
         playerEntity.setCountry(playerDTO.getCountry());
         playerEntity.setHeight(playerDTO.getHeight());
@@ -73,6 +74,7 @@ public class PlayerServiceImpl implements PlayerService {
         TeamEntity teamEntity = teamRepository.findById(playerDTO.getTeam_id()).get();
 
         playerEntity.setName(playerDTO.getName());
+        playerEntity.setAvatar(playerDTO.getAvatar());
         playerEntity.setYearOfBirth(playerDTO.getYear_of_birth());
         playerEntity.setCountry(playerDTO.getCountry());
         playerEntity.setHeight(playerDTO.getHeight());
