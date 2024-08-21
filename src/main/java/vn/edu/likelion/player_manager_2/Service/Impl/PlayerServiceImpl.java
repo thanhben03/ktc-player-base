@@ -69,6 +69,7 @@ public class PlayerServiceImpl implements PlayerService {
         return playerRepository.findById(id).orElseThrow(()-> new RuntimeException("Player not found"));
     }
 
+    @Override
     public PlayerEntity update(int id, PlayerDTO playerDTO) {
         PlayerEntity playerEntity = playerRepository.findById(id).get();
         TeamEntity teamEntity = teamRepository.findById(playerDTO.getTeam_id()).get();
@@ -90,6 +91,7 @@ public class PlayerServiceImpl implements PlayerService {
         return playerRepository.save(playerEntity);
     }
 
+    @Override
     public Map<String, Object> compare(int player_1, int player_2) {
         HashMap<String, Object> player = new HashMap<>();
         HashMap<Integer, Object> infoPlayer = new HashMap<>();
@@ -147,7 +149,7 @@ public class PlayerServiceImpl implements PlayerService {
 
 
     //filter theo position & teamName
-
+    @Override
     public List<PlayerEntity> search(String q) {
 
         return playerRepository.findByNameContaining(q);

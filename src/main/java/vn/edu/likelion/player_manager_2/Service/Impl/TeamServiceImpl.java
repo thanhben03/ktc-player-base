@@ -40,6 +40,7 @@ public class TeamServiceImpl implements TeamService {
         return teamRepository.findById(id).orElseThrow(()-> new RuntimeException("Team not found"));
     }
 
+    @Override
     public TeamEntity update(int id, TeamDTO teamDTO) {
         TeamEntity teamEntity = teamRepository.findById(id).get();
 
