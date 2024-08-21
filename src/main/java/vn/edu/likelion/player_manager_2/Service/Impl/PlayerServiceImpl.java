@@ -5,15 +5,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vn.edu.likelion.player_manager_2.Entity.PlayerEntity;
 import vn.edu.likelion.player_manager_2.Entity.TeamEntity;
+import vn.edu.likelion.player_manager_2.Model.FilterRequest;
 import vn.edu.likelion.player_manager_2.Model.PlayerDTO;
 import vn.edu.likelion.player_manager_2.Repository.PlayerRepository;
 import vn.edu.likelion.player_manager_2.Repository.TeamRepository;
 import vn.edu.likelion.player_manager_2.Response.PlayerCompare;
 import vn.edu.likelion.player_manager_2.Service.PlayerService;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Filter;
 
 @Service
 public class PlayerServiceImpl implements PlayerService {
@@ -69,6 +72,7 @@ public class PlayerServiceImpl implements PlayerService {
         return playerRepository.findById(id).orElseThrow(()-> new RuntimeException("Player not found"));
     }
 
+    @Override
     public PlayerEntity update(int id, PlayerDTO playerDTO) {
         PlayerEntity playerEntity = playerRepository.findById(id).get();
         TeamEntity teamEntity = teamRepository.findById(playerDTO.getTeam_id()).get();
@@ -90,6 +94,7 @@ public class PlayerServiceImpl implements PlayerService {
         return playerRepository.save(playerEntity);
     }
 
+    @Override
     public Map<String, Object> compare(int player_1, int player_2) {
         HashMap<String, Object> player = new HashMap<>();
         HashMap<Integer, Object> infoPlayer = new HashMap<>();
@@ -147,11 +152,27 @@ public class PlayerServiceImpl implements PlayerService {
 
 
     //filter theo position & teamName
-
+    @Override
     public List<PlayerEntity> search(String q) {
 
         return playerRepository.findByNameContaining(q);
     }
 
+    public List<PlayerEntity> filter(FilterRequest filterRequest) throws Exception {
+        List<PlayerEntity> playerEntities;
+        if (filterRequest.getPosition() != null && filterRequest.getTeam_id() != 0) {
+            playerEntities = playerRepository.findByPositionAndTeamId(filterRequest.getPosition(), filterRequest.getTeam_id());
+        } else if (filterRequest.getPosition() != null) {
+            playerEntities = playerRepository.findByPosition(filterRequest.getPosition());
+        } else {
+            playerEntities = playerRepository.findByTeamId(filterRequest.getTeam_id());
+        }
+
+        if (playerEntities.isEmpty()) {
+            throw new Exception("Not found !");
+        }
+
+        return playerEntities;
+    }
 
 }
