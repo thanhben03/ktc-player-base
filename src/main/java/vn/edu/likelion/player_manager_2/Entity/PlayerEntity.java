@@ -47,5 +47,6 @@ public class PlayerEntity extends BaseEntity {
     private int bc; // ball control
     private int ls; // long sort
     private int sp; // shot power
+
 }
 

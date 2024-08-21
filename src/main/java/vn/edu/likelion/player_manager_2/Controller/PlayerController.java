@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vn.edu.likelion.player_manager_2.Entity.PlayerEntity;
+import vn.edu.likelion.player_manager_2.Model.FilterRequest;
 import vn.edu.likelion.player_manager_2.Model.PlayerDTO;
 import vn.edu.likelion.player_manager_2.Service.Impl.PlayerServiceImpl;
 import vn.edu.likelion.player_manager_2.Util.ResponseHandler;
@@ -109,6 +110,18 @@ public class PlayerController {
             Map<String, Object> res = playerService.compare(player_1, player_2);
             return ResponseHandler.generateResponse(HttpStatus.OK, false,
                     "Success!", res);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(HttpStatus.BAD_REQUEST, true,
+                    "Failed!", e.getMessage());
+        }
+    }
+
+    @PostMapping("/filter")
+    private ResponseEntity<Object> filter(@RequestBody FilterRequest filterRequest) {
+        try {
+            List<PlayerEntity> playerEntities = playerService.filter(filterRequest);
+            return ResponseHandler.generateResponse(HttpStatus.OK, false,
+                    "Success!", playerEntities);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(HttpStatus.BAD_REQUEST, true,
                     "Failed!", e.getMessage());
