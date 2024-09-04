@@ -53,10 +53,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/welcome", "/api/v1/auth/register", "/api/v1/auth/login").permitAll())
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/api/v1/auth/register/**", "/api/v1/auth/login/**", "http://localhost:8080/api/v1/auth/login").permitAll())
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/api/v1/player/**").authenticated())
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/api/v1/team/**").authenticated())
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/api/v1/upload/**").authenticated())
+//                .authorizeHttpRequests(auth -> auth.requestMatchers("/**").permitAll())
+
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)

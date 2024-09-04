@@ -96,17 +96,23 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public Map<String, Object> compare(int player_1, int player_2) {
+        // Mảng dùng để lưu thông tin so sánh của player và thông tin của cả 2
         HashMap<String, Object> player = new HashMap<>();
+
+        // Mảng dùng để lưu thông tin của 2 player
         HashMap<Integer, Object> infoPlayer = new HashMap<>();
+
         PlayerEntity player1 = playerRepository.findById(player_1).get();
         PlayerEntity player2 = playerRepository.findById(player_2).get();
 
         infoPlayer.put(0, player1);
         infoPlayer.put(1, player2);
 
+        // Object dùng để lưu thông tin chỉ số của player sau khi đã so sánh
         PlayerCompare playerCompare1 = new PlayerCompare();
         PlayerCompare playerCompare2 = new PlayerCompare();
 
+        // Mảng dùng để lưu thông tin so sánh của player
         HashMap<Integer, Object> compare = new HashMap<>();
 
         playerCompare1.setSp(player1.getSp() - player2.getSp());
@@ -121,8 +127,8 @@ public class PlayerServiceImpl implements PlayerService {
         playerCompare1.setBc(player1.getBc() - player2.getBc());
         playerCompare2.setBc(player2.getBc() - player1.getBc());
 
-        compare.put(0, playerCompare1);
-        compare.put(1, playerCompare2);
+        compare.put(0, playerCompare1); // lưu thông tin so sánh của player 1
+        compare.put(1, playerCompare2); // lưu thông tin so sánh của player 2
 
         player.put("player", infoPlayer);
         player.put("compare", compare);
@@ -134,12 +140,14 @@ public class PlayerServiceImpl implements PlayerService {
         Iterable<PlayerEntity> playerEntities = null;
 
         switch (type) {
+            // sort theo vị trí đá
             case "position":
                 if (order.equals("desc"))
                     playerEntities = playerRepository.findByOrderByPositionDesc();
                 else
                     playerEntities = playerRepository.findByOrderByPositionAsc();
                 break;
+            // sort theo bảng lương
             case "salary":
                 if (order.equals("desc"))
                     playerEntities = playerRepository.findByOrderBySalaryDesc();
@@ -160,11 +168,12 @@ public class PlayerServiceImpl implements PlayerService {
 
     public List<PlayerEntity> filter(FilterRequest filterRequest) throws Exception {
         List<PlayerEntity> playerEntities;
+        // Nếu người dùng filter theo cả vị trí và đội bóng
         if (filterRequest.getPosition() != null && filterRequest.getTeam_id() != 0) {
             playerEntities = playerRepository.findByPositionAndTeamId(filterRequest.getPosition(), filterRequest.getTeam_id());
-        } else if (filterRequest.getPosition() != null) {
+        } else if (filterRequest.getPosition() != null) { // chỉ filter theo vị trí
             playerEntities = playerRepository.findByPosition(filterRequest.getPosition());
-        } else {
+        } else { // ngược lại chỉ filter theo đội bóng
             playerEntities = playerRepository.findByTeamId(filterRequest.getTeam_id());
         }
 

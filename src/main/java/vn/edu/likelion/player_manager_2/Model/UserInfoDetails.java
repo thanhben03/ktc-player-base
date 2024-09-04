@@ -1,9 +1,11 @@
 package vn.edu.likelion.player_manager_2.Model;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import vn.edu.likelion.player_manager_2.Entity.UserEntity;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -16,6 +18,15 @@ public class UserInfoDetails implements UserDetails {
     public UserInfoDetails(UserEntity userInfo) {
         name = userInfo.getUsername();
         password = userInfo.getPassword();
+
+        authorities = new ArrayList<>();
+
+        if (userInfo.getUsername() == "admin") {
+            authorities.add(new SimpleGrantedAuthority("ADMIN"));
+        } else {
+            authorities.add(new SimpleGrantedAuthority("USER"));
+
+        }
 
     }
 

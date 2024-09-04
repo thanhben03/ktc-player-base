@@ -14,6 +14,7 @@ import vn.edu.likelion.player_manager_2.Util.ResponseHandler;
 
 @RestController
 @RequestMapping("/api/v1/auth")
+@CrossOrigin
 public class UserController {
 
     @Autowired

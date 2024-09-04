@@ -4,6 +4,7 @@ package vn.edu.likelion.player_manager_2.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import vn.edu.likelion.player_manager_2.Entity.PlayerEntity;
 import vn.edu.likelion.player_manager_2.Model.FilterRequest;
@@ -18,6 +19,7 @@ import java.util.Map;
 @RequestMapping("/api/v1/player")
 @CrossOrigin
 public class PlayerController {
+
     @Autowired
     private PlayerServiceImpl playerService;
 
@@ -116,6 +118,7 @@ public class PlayerController {
         }
     }
 
+    @PreAuthorize("ADMIN")
     @PostMapping("/filter")
     private ResponseEntity<Object> filter(@RequestBody FilterRequest filterRequest) {
         try {

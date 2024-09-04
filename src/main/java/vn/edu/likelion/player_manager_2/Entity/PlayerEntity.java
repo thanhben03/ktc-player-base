@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "tbl_player")
 @Data
-@Builder
+//@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class PlayerEntity extends BaseEntity {
@@ -41,11 +41,19 @@ public class PlayerEntity extends BaseEntity {
     @JoinColumn(name = "team_id", nullable = false)
     private TeamEntity team; // thuộc team...
 
+    @Column
     private double salary;
 
+    @Column
     private int ss; // speed
+
+    @Column
     private int bc; // ball control
+
+    @Column
     private int ls; // long sort
+
+    @Column
     private int sp; // shot power
 
 }
